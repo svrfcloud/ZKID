@@ -1,0 +1,28 @@
+body {
+    background-color: black;
+    color: cadetblue;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: space-evenly;
+    /* Even spacing between boxes */
+    /* align-items: center; */
+    /* Align vertically */
+    width: 100%;
+    text-align: center;
+    border: 3px aliceblue solid;
+    background-color: black;
+    padding: 45px;
+}
+
+.bu {
+    border: 2px solid slategray;
+    font-weight: 600;
+    background-color: rgba(92, 19, 141, 0.2);
+    color: cadetblue;
+    border-radius: 40px;
+    margin: 30px;
+    padding: 20px;
+}
