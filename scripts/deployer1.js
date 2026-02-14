@@ -42,28 +42,22 @@ async function deriveAnchorState() {
 
   fs.writeFileSync("./circuits/input.json", JSON.stringify(input, null, 2));
 
-  const subprocess = spawn("bash", ["index.sh"], {
-    cwd: "./circuits",
-    stdio: ["pipe", "pipe", "pipe"],
+  const subprocess = spawn("bash", ["index1.sh"], {
+    cwd: "./circuits"
+    // stdio: ["pipe", "pipe", "pipe"],
   });
 
-  subprocess.stdout.on("data", (data) => {
-    const output = data.toString();
-    console.log("CIRCOM OUTPUT:", output);
+//   subprocess.stdout.on("data", (data) => {
+//     const output = data.toString();
+//     console.log("CIRCOM OUTPUT:", output);
 
-    if (output.includes("Enter circom filename to start the compiler.")) {
-      subprocess.stdin.write("anchor\n");
-    } else if (output.includes("How many")) {
-      subprocess.stdin.write("12\n");
-    } else if (output.includes("Enter a random text")) {
-      subprocess.stdin.write("GENESIS\n");
-    } else if (output.includes("Entropy")) {
-      subprocess.stdin.write("ZERO STATE\n");
-    }
-  });
+//     if (output.includes("Enter circom filename")) {
+//       subprocess.stdin.write("anchor\n");
+//     }
+//   });
 
   subprocess.stderr.on("data", (data) => {
-    console.error(`stderr: ${data}`);
+    console.error(`CIRCOM ERROR: ${data}`);
   });
 
   subprocess.on("close", async (code) => {

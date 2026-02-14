@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import "./Verifier.sol";
+// import "./Verifier.sol";
 
 interface IVerifier {
     function verifyProof(
