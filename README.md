@@ -22,18 +22,17 @@ ZKID/
 ├── contracts/
 │   ├── eNFT.sol          # Base identity NFT + state chain
 │   ├── IeNFT.sol         # Interface + Connect helper
-│   ├── IDwithZK.sol      # ZK-enabled login wrapper (Groth16)
-│   ├── Poseidon.sol      # Poseidon hash (Solidity)
-│   └── Verifier.sol      # Groth16 verifier
+│   ├── IDwithZK.sol      # ZK-enabled login wrapper (Interfacing Groth16 for zkLogin)
+│   └── Verifier.sol      # Groth16 verifier (created when deployer.js script is launched)
 │
 ├── circuits/
 │   ├── index.circom      # Inclusion + chain circuit (Poseidon)
 │   ├── input.json        # Example witness input
-│   ├── index.wasm        # Compiled circuit
+│   ├── anchor.circom     # Circuit for n transitions
 │   └── index_final.zkey  # Proving key
 │
 ├── scripts/
-│   ├── deployer.js       # Deploy contract + derive genesis state
+│   ├── deployer.js       # Deploy contract + derive genesis state + run (S_1 -> S_0) circuit
 │   └── batchTree.js      # Build Poseidon state chain off-chain
 │
 └── frontend/
@@ -42,6 +41,10 @@ ZKID/
     ├── proxyscript.js    # Front-end logic (signup + zkLogin)
     ├── Connect.json      # ABI
     └── IDwithZK.json     # ABI
+    │
+└── clean_circuits.sh     # Shell script to clean circuits during tests
+└── sgeth.sh              # Shell script to start dev blockchain
+
 ```
 
 ---
@@ -153,21 +156,21 @@ This enables login without revealing:
 npm install
 ```
 
-### **Compile circuits**
+### **Run geth's dev chain**
 ```
-bash ./index1.sh
+bash ./sgeth.sh
 ```
 
-### **Deploy contracts**
+### **Deploy the anchor contract**
 ```
 node scripts/deployer.js
 ```
 
 ### **Run the front-end**
-Serve the `frontend/` directory with any static server:
+Serve the `front/` directory with any static server:
 
 ```
-npx http-server
+npx http-server front/
 ```
 
 ---
