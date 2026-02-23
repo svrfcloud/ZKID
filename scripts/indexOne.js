@@ -7,7 +7,7 @@ const { spawn } = require("child_process");
 async function fetchTime() {
   provider = new ethers.JsonRpcProvider("http://localhost:8545");
 
-  rawState = fs.readFileSync("../circuits/anchor_js/public.json", "utf-8");
+  rawState = fs.readFileSync("./circuits/anchor_js/public.json", "utf-8");
   parseState = JSON.parse(rawState);
   S_0 = parseState[0];
 
@@ -26,10 +26,10 @@ async function fetchTime() {
     previousState: S_0,
   };
 
-  fs.writeFileSync("../circuits/input1.json", JSON.stringify(input, null, 2));
+  fs.writeFileSync("./circuits/input1.json", JSON.stringify(input, null, 2));
 
-  const subprocess = spawn("bash", ["../circuits/index1.sh"]);
-  const circomFileName = "anchor\n"; // change to index
+  const subprocess = spawn("bash", ["./circuits/index.sh"]);
+  const circomFileName = "index\n"; // change to index
   const powersOfTau = "12\n";
   const entropy1 = "User1\n";
   const entropy2 = "S_0\n";

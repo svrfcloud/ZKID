@@ -4,7 +4,7 @@
 echo "Enter circom filename to start the compiler."
 read circomFile
 
-filePath=~/enft/circuits
+filePath=~/ZKID/circuits
 circomFilePath="${filePath}/${circomFile}.circom"
 
 if [[ ! -f $circomFilePath ]]; then
